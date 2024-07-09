@@ -4,8 +4,13 @@ import Button from "../ui/Button";
 
 import { HiMiniUser } from "react-icons/hi2";
 import { HiOutlineArrowRight } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 const StyledNavbar = styled.nav`
+  min-width: 100%;
+  position: fixed;
+  z-index: 100;
+  top: 0;
   background-color: #0a2e36;
   display: flex;
   justify-content: space-between;
@@ -29,16 +34,17 @@ const StyledUl = styled.ul`
   }
 `;
 function Navbar() {
+  const navigate = useNavigate();
   return (
     <StyledNavbar>
       <Logo />
       <StyledUl>
-        <li>
+        <li onClick={() => navigate("/account")}>
           <HiMiniUser />
           Account
         </li>
 
-        <Button variation="secondary">
+        <Button variation="secondary" onClick={() => navigate("/logout")}>
           Logout
           <HiOutlineArrowRight />
         </Button>

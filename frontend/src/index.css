@@ -7,13 +7,32 @@
 }
 html {
   font-size: 62.5%;
-  color: #0f0f0f;
+  color: #0a2e36;
 }
 body {
   font-family: "Inter", sans-serif;
   /* font-optical-sizing: auto; */
   font-style: normal;
   font-variation-settings: "slnt" 0;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 /* flex */
 

@@ -1,6 +1,6 @@
 import "./SignupCreateAccountButtons.css";
 import Button from "../ui/Button";
-import GoogleLogo from "../ui/GoogleLogo";
+// import GoogleLogo from "../ui/GoogleLogo";
 
 function SignupCreateAccount({ isFormOpen, onFormOpen }) {
   return (
@@ -16,11 +16,11 @@ function SignupCreateAccount({ isFormOpen, onFormOpen }) {
             Signup
           </Button>
         )}
-        <p>or</p>
+        {/* <p>or</p>
         <Button size="large" variation="secondary">
           <GoogleLogo />
           Continue with Google
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

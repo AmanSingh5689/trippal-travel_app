@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import { registerUser } from "../services/api";
 import useLoading from "../hooks/useLoading";
 import Loader from "../components/Loader";
-import SuccessFulSignup from "./SuccessfulSignup";
+import SuccessFulSignup from "./SuccessFulSignup";
 
 const initialData = {
   name: "",

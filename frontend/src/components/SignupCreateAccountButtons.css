@@ -9,6 +9,7 @@
 .create_account-btns {
   align-items: stretch;
   gap: 2.4rem;
+  margin-top: 2.4rem;
 }
 .create_account-btns p {
   align-self: center;

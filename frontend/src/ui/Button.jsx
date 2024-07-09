@@ -43,6 +43,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: start;
   gap: 1.2rem;
+  cursor: pointer;
 
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}

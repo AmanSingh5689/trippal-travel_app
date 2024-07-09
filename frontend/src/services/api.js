@@ -24,4 +24,13 @@ export const loginUser = async (userData) => {
   }
 };
 
+export const getUser = async (userData) => {
+  try {
+    const response = await api.post("/get-user", userData);
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching user", err);
+  }
+};
+
 export default api;

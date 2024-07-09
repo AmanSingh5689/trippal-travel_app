@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Searchbox from "../ui/Searchbox";
 import { placesData } from "../../public/data/dummyData";
 import Aboutus from "../components/Aboutus";
@@ -7,7 +8,6 @@ import { getCity } from "../services/getCity";
 import Loader from "../components/Loader";
 // import { getLocations } from "../services/getLocations";
 import { fetchFamousPlaces } from "../services/OpenTripMap";
-import { getLocations } from "../services/getLocations";
 
 const StyledHomepage = styled.div`
   text-align: center;
@@ -74,10 +74,10 @@ const StyledPlaceBox = styled.div`
   }
 `;
 
-function Homepage() {
+function Homepage({ searchResult, onSearchResult }) {
   const popular_places = useRef(null);
-  const [searchResult, setSearchResult] = useState({});
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // card horizontal scrolling on homepage
   function handleScroll(e) {
@@ -86,10 +86,20 @@ function Homepage() {
   async function handleSearch(city) {
     try {
       setLoading(true);
-      const cityObj = await getCity(city);
-      const locations = await getLocations(city);
-      console.log("locations", locations);
-      setSearchResult(cityObj);
+      const {
+        name: cityName,
+        timezone,
+        region,
+        label,
+        image_url,
+      } = await getCity(city);
+      const locations = await fetchFamousPlaces(city);
+      console.log(locations);
+      onSearchResult([
+        { cityName, timezone, region, label, image_url },
+        locations,
+      ]);
+      navigate(`/city/${cityName.toLowerCase()}`);
     } catch (error) {
       console.error("Error searching city", error);
     } finally {
@@ -99,7 +109,7 @@ function Homepage() {
   return (
     <StyledHomepage>
       <h2 className="homepage-heading">
-        Hey <span>Aman!</span> Where to?
+        Hey <span>traveller!</span> Where to?
       </h2>
       <Searchbox
         onSearch={handleSearch}
@@ -110,7 +120,6 @@ function Homepage() {
         <Loader />
       ) : (
         <>
-          {console.log(searchResult)}
           <Aboutus />
           <StyledPopularPlacesContainer>
             <h3 className="popular-places-heading">Popular Places</h3>

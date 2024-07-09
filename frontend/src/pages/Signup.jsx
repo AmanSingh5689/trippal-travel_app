@@ -10,7 +10,7 @@ import Login from "../components/Login";
 
 import { HiOutlineArrowRight } from "react-icons/hi2";
 
-function Signup() {
+function Signup({ onLogin, onSetUsername }) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoginActive, setIsLoginActive] = useState(false);
 
@@ -43,7 +43,12 @@ function Signup() {
           )}
         </div>
         {isLoginActive ? (
-          <Login isLoginActive={isLoginActive} onLogin={handleIsLoginActive} />
+          <Login
+            isLoginActive={isLoginActive}
+            onLogin={handleIsLoginActive}
+            onLog={onLogin}
+            onSetUsername={onSetUsername}
+          />
         ) : (
           <SignupCreateAccountButtons
             isFormOpen={isFormOpen}

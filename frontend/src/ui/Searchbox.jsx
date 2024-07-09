@@ -3,7 +3,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import styled from "styled-components";
 
 const StyledSearchBox = styled.div`
-  background-color: #f0f0f0;
+  background-color: white;
   color: #0a2e36;
   max-width: 48.5rem;
   min-height: 6.4rem;

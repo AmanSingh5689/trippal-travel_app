@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../ui/Button";
-import videoSrc from "../../public/videos/result.mp4"; // Import your video file
+import videoSrc from "/videos/result.mp4"; // Import your video file
+import { useNavigate } from "react-router-dom";
 
 const StyledAboutUs = styled.div`
   margin: 0 auto;
@@ -61,6 +62,10 @@ const StyledAboutUs = styled.div`
 `;
 
 function Aboutus() {
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/about");
+  }
   return (
     <StyledAboutUs className="about_us_box">
       <video autoPlay loop muted>
@@ -76,7 +81,9 @@ function Aboutus() {
         discover the perfect getaway to revitalize your spirit and create
         lasting memories.
       </p>
-      <Button variation="secondary">About us</Button>
+      <Button variation="secondary" onClick={handleClick}>
+        About us
+      </Button>
     </StyledAboutUs>
   );
 }

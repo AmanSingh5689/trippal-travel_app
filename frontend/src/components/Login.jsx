@@ -2,23 +2,30 @@ import { useState } from "react";
 import Button from "../ui/Button";
 import "./Login.css";
 import { loginUser } from "../services/api";
-function Login({ onLogin }) {
+import { useNavigate } from "react-router-dom";
+function Login({ isLoginActive, onLogin, onLog, onSetUsername }) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (validateInput(credentials)) {
       try {
         const response = await loginUser(credentials);
-        console.log("Login successful:", response);
+        // console.log("Login successful:", response);
         onLogin(false); // Close the form after successful login
+        onLog(true);
+        onSetUsername(credentials);
+
+        navigate("/home");
       } catch (error) {
         console.error("Login failed:", error);
         setError("Login failed. Please try again.");
+        alert(error.message);
       }
     } else {
       setError("Please enter valid credentials.");
@@ -34,6 +41,7 @@ function Login({ onLogin }) {
     if (username.length < 2) return false;
     return true;
   }
+
   return (
     <form method="POST" onSubmit={handleSubmit} className="LoginForm">
       <div className="login-input">

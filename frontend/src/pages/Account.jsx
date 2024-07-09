@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { getUser } from "../services/api";
+import { useEffect } from "react";
 
 const StyledAccount = styled.div`
   background-image: linear-gradient(135deg, #e0e0e0 0%, #cfcfcf 100%);
@@ -55,7 +57,14 @@ const StyledAccount = styled.div`
   }
 `;
 
-function Account() {
+function Account({ username }) {
+  useEffect(() => {
+    async function getUserDetails() {
+      const user = await getUser(username);
+      console.log(user);
+    }
+    getUserDetails();
+  });
   return (
     <StyledAccount>
       <div className="account-header">
