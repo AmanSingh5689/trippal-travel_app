@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 
 const StyledFlightFormContainer = styled.div`
   margin: 0 auto;
+  margin-bottom: 4.8rem;
   max-width: 42.6rem;
   border-radius: 12px;
   box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.16);

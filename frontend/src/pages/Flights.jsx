@@ -77,6 +77,7 @@ function Flights() {
           fastestFlight={fastestFlight}
           cheapestFlight={cheapestFlight}
           totalFlights={flightResults.length}
+          departure={departureDate}
           isRoundTrip={isRoundTrip}
         />
       )}

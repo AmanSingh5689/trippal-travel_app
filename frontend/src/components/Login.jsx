@@ -5,8 +5,8 @@ import { loginUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
 function Login({ isLoginActive, onLogin, onLog, onSetUsername }) {
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
+    username: "johnwick123",
+    password: "johnwick@123",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();

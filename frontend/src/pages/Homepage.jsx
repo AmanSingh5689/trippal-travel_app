@@ -84,6 +84,17 @@ function Homepage({ searchResult, onSearchResult }) {
     popular_places.current.scrollLeft += e.deltaY * 5;
   }
   async function handleSearch(city) {
+    let citySearch = null;
+    let locationSearch = null;
+    if (
+      city === "Mysore" ||
+      city === "Mysuru" ||
+      city === "mysore" ||
+      city === "mysuru"
+    ) {
+      citySearch = "Mysore";
+      locationSearch = "Mysuru";
+    }
     try {
       setLoading(true);
       const {
@@ -92,8 +103,8 @@ function Homepage({ searchResult, onSearchResult }) {
         region,
         label,
         image_url,
-      } = await getCity(city);
-      const locations = await fetchFamousPlaces(city);
+      } = await getCity(citySearch || city);
+      const locations = await fetchFamousPlaces(locationSearch || city);
       console.log(locations);
       onSearchResult([
         { cityName, timezone, region, label, image_url },

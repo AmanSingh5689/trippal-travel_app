@@ -8,11 +8,16 @@ const FlightCard = ({
   cheapestFlight,
   totalFlights,
   isRoundTrip,
+  departure,
 }) => {
   const fromCode = fastestFlight.legs[0].origin.id;
   const fromCity = fastestFlight.legs[0].origin.city;
   const toCode = fastestFlight.legs[0].destination.id;
   const toCity = fastestFlight.legs[0].destination.city;
+  console.log(fastestFlight, cheapestFlight);
+  const carriers = [];
+  carriers.push(fastestFlight.legs[0].carriers.marketing[0].logoUrl);
+  carriers.push(cheapestFlight.legs[0].carriers.marketing[0].logoUrl);
 
   function minutesToHour(minutes) {
     const hour = Math.trunc(minutes / 60) + "";
@@ -39,7 +44,7 @@ const FlightCard = ({
         </p>
         <p>
           <HiCalendar />
-          Departure: 24/10/24
+          Departure:{departure}
         </p>
       </div>
       <div className="flight-options">
@@ -80,10 +85,13 @@ const FlightCard = ({
         <div className="providers">
           <p>Available Providers</p>
           <div className="provider-dots">
-            <span className="dot filled"></span>
-            <span className="dot filled"></span>
-            <span className="dot filled"></span>
-            <span className="dot"></span>
+            {carriers.map((el, key) => {
+              return (
+                <span className="logo" key={key}>
+                  <img src={el} />
+                </span>
+              );
+            })}
           </div>
         </div>
         <p className="additional-info_total-available">

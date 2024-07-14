@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { getUser } from "../services/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loader from "../components/Loader";
 
 const StyledAccount = styled.div`
   background-image: linear-gradient(135deg, #e0e0e0 0%, #cfcfcf 100%);
@@ -57,14 +57,27 @@ const StyledAccount = styled.div`
   }
 `;
 
-function Account({ username }) {
+function Account({ user }) {
+  const [currentUser, setCurrentUser] = useState(null);
+
   useEffect(() => {
     async function getUserDetails() {
-      const user = await getUser(username);
-      console.log(user);
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:3000/api/user/${user.username}`
+        );
+        const data = await response.json();
+        setCurrentUser(data.data);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+      }
     }
-    getUserDetails();
-  });
+
+    if (user) {
+      getUserDetails();
+    }
+  }, [user]);
+
   return (
     <StyledAccount>
       <div className="account-header">
@@ -74,26 +87,28 @@ function Account({ username }) {
         </p>
       </div>
       <div className="account-information">
-        <div className="account-info-item">
-          <p className="account-info-label">Name</p>
-          <p className="account-info-value">Aman Singh</p>
-        </div>
-        <div className="account-info-item">
-          <p className="account-info-label">Username</p>
-          <p className="account-info-value">aman26singh48</p>
-        </div>
-        <div className="account-info-item">
-          <p className="account-info-label">Password</p>
-          <p className="account-info-value">******</p>
-        </div>
-        <div className="account-info-item">
-          <p className="account-info-label">Email</p>
-          <p className="account-info-value">aman@gmail.com</p>
-        </div>
-        <div className="account-info-item">
-          <p className="account-info-label">Contact</p>
-          <p className="account-info-value">Aman Singh</p>
-        </div>
+        {currentUser ? (
+          <>
+            <div className="account-info-item">
+              <p className="account-info-label">Name</p>
+              <p className="account-info-value">{currentUser.name}</p>
+            </div>
+            <div className="account-info-item">
+              <p className="account-info-label">Username</p>
+              <p className="account-info-value">{currentUser.username}</p>
+            </div>
+            <div className="account-info-item">
+              <p className="account-info-label">Email</p>
+              <p className="account-info-value">{currentUser.email}</p>
+            </div>
+            <div className="account-info-item">
+              <p className="account-info-label">Contact</p>
+              <p className="account-info-value">{currentUser.contact}</p>
+            </div>
+          </>
+        ) : (
+          <Loader />
+        )}
       </div>
     </StyledAccount>
   );

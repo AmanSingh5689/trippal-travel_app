@@ -1,9 +1,9 @@
 .flight-card {
+  margin-top: 4.8rem;
   position: relative;
   display: flex;
   justify-content: space-between;
   min-height: 40vh;
-  /* flex-direction: column; */
   background-image: url("../../public/images/Flight.jpg");
   background-size: cover;
   background-position: center;
@@ -95,22 +95,19 @@
   color: rgb(73, 73, 73);
   align-items: center;
 }
-
+.providers p {
+  font-weight: 500;
+}
 .provider-dots {
   display: flex;
   margin-left: 1rem;
 }
 
-.dot {
+.logo img {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 50%;
-  background-color: white;
   margin-right: 0.5rem;
-}
-
-.dot.filled {
-  background-color: grey;
 }
 
 .book-button {

@@ -14,7 +14,7 @@ import Logout from "./components/Logout";
 import ProtectedRoute from "./ui/ProtectedRoute";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState({});
+  const [user, setUser] = useState({});
   const [searchResult, setSearchResult] = useState(() => {
     const savedResult = localStorage.getItem("searchResult");
     return savedResult ? JSON.parse(savedResult) : [];
@@ -30,9 +30,9 @@ function App() {
       <Routes>
         <Route
           element={
-            // <ProtectedRoute isLoggedIn={isLoggedIn}>
-            <AppLayout />
-            // </ProtectedRoute>
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <AppLayout />
+            </ProtectedRoute>
           }
         >
           <Route index element={<Navigate replace to="home" />} />
@@ -46,7 +46,7 @@ function App() {
             }
           />
           <Route path="about" element={<Aboutus />} />
-          <Route path="account" element={<Account username={username} />} />
+          <Route path="account" element={<Account user={user} />} />
           <Route path="logout" element={<Logout />} />
           <Route
             path="city/:cityName"
@@ -57,9 +57,7 @@ function App() {
         </Route>
         <Route
           path="signup"
-          element={
-            <Signup onLogin={setIsLoggedIn} onSetUsername={setUsername} />
-          }
+          element={<Signup onLogin={setIsLoggedIn} onSetUsername={setUser} />}
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

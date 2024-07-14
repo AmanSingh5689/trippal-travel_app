@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 
-router.post("/get-user", async (req, res) => {
-  const { username, password } = req.body;
-  console.log(username, password);
+router.get("/:username", async (req, res) => {
+  // const { username, password } = req.body;
+  const { username } = req.params;
+  console.log(username);
   try {
     const user = await User.findOne({ username });
     if (!user) {
@@ -21,3 +22,5 @@ router.post("/get-user", async (req, res) => {
     console.log("Error fetching user", err);
   }
 });
+
+module.exports = router;
